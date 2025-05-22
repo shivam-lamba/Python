@@ -1,0 +1,333 @@
+USE [master]
+GO
+/****** Object:  Database [ProjectDB]    Script Date: 7/18/2019 2:52:01 PM ******/
+CREATE DATABASE [ProjectDB]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ProjectDB', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\ProjectDB.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'ProjectDB_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.SQLEXPRESS\MSSQL\DATA\ProjectDB_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [ProjectDB] SET COMPATIBILITY_LEVEL = 140
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ProjectDB].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ProjectDB] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ProjectDB] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ProjectDB] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ProjectDB] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ProjectDB] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ProjectDB] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [ProjectDB] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ProjectDB] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ProjectDB] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ProjectDB] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ProjectDB] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ProjectDB] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ProjectDB] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ProjectDB] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ProjectDB] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [ProjectDB] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ProjectDB] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ProjectDB] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ProjectDB] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ProjectDB] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ProjectDB] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [ProjectDB] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ProjectDB] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [ProjectDB] SET  MULTI_USER 
+GO
+ALTER DATABASE [ProjectDB] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ProjectDB] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ProjectDB] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ProjectDB] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ProjectDB] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [ProjectDB] SET QUERY_STORE = OFF
+GO
+USE [ProjectDB]
+GO
+/****** Object:  Table [dbo].[Attendance]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Attendance](
+	[uid] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NULL,
+	[RegistrationId] [int] NULL,
+	[EnrollmentId] [int] NULL,
+	[Attendance] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[uid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Courses]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Courses](
+	[CourseId] [int] IDENTITY(1,1) NOT NULL,
+	[courseName] [varchar](50) NULL,
+	[Description] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CourseId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Enrollments]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Enrollments](
+	[EnrollmentId] [int] IDENTITY(1,1) NOT NULL,
+	[EDate] [date] NULL,
+	[Semester] [varchar](3) NULL,
+	[RegistrationId] [int] NULL,
+	[IsCurrent] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[EnrollmentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Marks]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Marks](
+	[SerialNo] [int] IDENTITY(1,1) NOT NULL,
+	[SemesterSubjectId] [int] NULL,
+	[RegistrationId] [int] NULL,
+	[Marks] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SerialNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SemesterSubjects]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SemesterSubjects](
+	[SemesterSubjectId] [int] IDENTITY(1,1) NOT NULL,
+	[Semester] [varchar](3) NULL,
+	[CourseId] [int] NULL,
+	[SubjectId] [int] NULL,
+	[SessionId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SemesterSubjectId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sessions]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sessions](
+	[SessionId] [int] IDENTITY(1,1) NOT NULL,
+	[Session] [varchar](9) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SessionId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Students]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Students](
+	[RegistrationId] [int] IDENTITY(1,1) NOT NULL,
+	[RollNo] [int] NULL,
+	[RegistrationDate] [date] NULL,
+	[Name] [varchar](40) NULL,
+	[DOB] [date] NULL,
+	[Gender] [varchar](6) NULL,
+	[FatherName] [varchar](40) NULL,
+	[MotherName] [varchar](40) NULL,
+	[Address] [varchar](50) NULL,
+	[City] [varchar](20) NULL,
+	[ContactNo] [int] NULL,
+	[EmailId] [varchar](50) NULL,
+	[Nationality] [varchar](20) NULL,
+	[CourseId] [int] NULL,
+	[SessionId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RegistrationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Subjects]    Script Date: 7/18/2019 2:52:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Subjects](
+	[SubjectId] [int] IDENTITY(1,1) NOT NULL,
+	[Subject] [varchar](10) NULL,
+	[Description] [varchar](40) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SubjectId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Courses] ON 
+GO
+INSERT [dbo].[Courses] ([CourseId], [courseName], [Description]) VALUES (12, N'B.Tech EE', N'Electrical Engineering')
+GO
+INSERT [dbo].[Courses] ([CourseId], [courseName], [Description]) VALUES (13, N'B.Tech ME', N'Mechanical engineering')
+GO
+INSERT [dbo].[Courses] ([CourseId], [courseName], [Description]) VALUES (14, N'B.Tech CSE', N'Computer Science and Engineering')
+GO
+INSERT [dbo].[Courses] ([CourseId], [courseName], [Description]) VALUES (15, N'B.Tech ECE', N'Electronics and Communication Engineering')
+GO
+INSERT [dbo].[Courses] ([CourseId], [courseName], [Description]) VALUES (16, N'BTech IT', N'Information Technology')
+GO
+SET IDENTITY_INSERT [dbo].[Courses] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Enrollments] ON 
+GO
+INSERT [dbo].[Enrollments] ([EnrollmentId], [EDate], [Semester], [RegistrationId], [IsCurrent]) VALUES (3, CAST(N'2019-07-18' AS Date), N'5th', 5, 1)
+GO
+INSERT [dbo].[Enrollments] ([EnrollmentId], [EDate], [Semester], [RegistrationId], [IsCurrent]) VALUES (4, CAST(N'2019-07-18' AS Date), N'5th', 8, 1)
+GO
+INSERT [dbo].[Enrollments] ([EnrollmentId], [EDate], [Semester], [RegistrationId], [IsCurrent]) VALUES (5, CAST(N'2019-07-18' AS Date), N'5th', 7, 1)
+GO
+SET IDENTITY_INSERT [dbo].[Enrollments] OFF
+GO
+SET IDENTITY_INSERT [dbo].[SemesterSubjects] ON 
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (1, N'', 16, 6, 16)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (2, N'', 16, 6, 16)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (3, N'2nd', 13, 3, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (4, N'1st', 14, 3, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (5, N'1st', 14, 4, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (6, N'1st', 14, 5, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (7, N'1st', 14, 6, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (8, N'1st', 14, 6, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (9, N'2nd', 14, 3, 13)
+GO
+INSERT [dbo].[SemesterSubjects] ([SemesterSubjectId], [Semester], [CourseId], [SubjectId], [SessionId]) VALUES (10, N'2nd', 14, 4, 13)
+GO
+SET IDENTITY_INSERT [dbo].[SemesterSubjects] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Sessions] ON 
+GO
+INSERT [dbo].[Sessions] ([SessionId], [Session]) VALUES (13, N'2017-2021')
+GO
+INSERT [dbo].[Sessions] ([SessionId], [Session]) VALUES (14, N'2018-2022')
+GO
+INSERT [dbo].[Sessions] ([SessionId], [Session]) VALUES (15, N'2019-2023')
+GO
+INSERT [dbo].[Sessions] ([SessionId], [Session]) VALUES (16, N'2020-2024')
+GO
+SET IDENTITY_INSERT [dbo].[Sessions] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Students] ON 
+GO
+INSERT [dbo].[Students] ([RegistrationId], [RollNo], [RegistrationDate], [Name], [DOB], [Gender], [FatherName], [MotherName], [Address], [City], [ContactNo], [EmailId], [Nationality], [CourseId], [SessionId]) VALUES (5, 11701131, CAST(N'2019-08-18' AS Date), N'Ankush Kamboj', CAST(N'2000-02-16' AS Date), N'Male', N'', N'', N'', N'Abohar', 75893, N'ankush@gmail.com', N'Indian', 14, 13)
+GO
+INSERT [dbo].[Students] ([RegistrationId], [RollNo], [RegistrationDate], [Name], [DOB], [Gender], [FatherName], [MotherName], [Address], [City], [ContactNo], [EmailId], [Nationality], [CourseId], [SessionId]) VALUES (7, 11701042, CAST(N'2019-08-18' AS Date), N'Vanshika', CAST(N'1999-08-06' AS Date), N'Female', N'', N'', N'', N'Sunam', 78945, N'Vanshika@gmail.com', N'Indian', 14, 13)
+GO
+INSERT [dbo].[Students] ([RegistrationId], [RollNo], [RegistrationDate], [Name], [DOB], [Gender], [FatherName], [MotherName], [Address], [City], [ContactNo], [EmailId], [Nationality], [CourseId], [SessionId]) VALUES (8, 11701029, CAST(N'2019-08-18' AS Date), N'Mehak', CAST(N'2000-04-21' AS Date), N'Female', N'', N'', N'', N'Fazilka', 78945, N'Mehak@gmail.com', N'Indian', 14, 13)
+GO
+SET IDENTITY_INSERT [dbo].[Students] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Subjects] ON 
+GO
+INSERT [dbo].[Subjects] ([SubjectId], [Subject], [Description]) VALUES (3, N'CP', N'Computer Programming')
+GO
+INSERT [dbo].[Subjects] ([SubjectId], [Subject], [Description]) VALUES (4, N'CN', N'Computer Networks')
+GO
+INSERT [dbo].[Subjects] ([SubjectId], [Subject], [Description]) VALUES (5, N'OOPs', N'Object Oriented Programming')
+GO
+INSERT [dbo].[Subjects] ([SubjectId], [Subject], [Description]) VALUES (6, N'SE', N'Software Enginnering')
+GO
+SET IDENTITY_INSERT [dbo].[Subjects] OFF
+GO
+ALTER TABLE [dbo].[Attendance]  WITH CHECK ADD FOREIGN KEY([EnrollmentId])
+REFERENCES [dbo].[Enrollments] ([EnrollmentId])
+GO
+ALTER TABLE [dbo].[Attendance]  WITH CHECK ADD FOREIGN KEY([RegistrationId])
+REFERENCES [dbo].[Students] ([RegistrationId])
+GO
+ALTER TABLE [dbo].[Enrollments]  WITH CHECK ADD FOREIGN KEY([RegistrationId])
+REFERENCES [dbo].[Students] ([RegistrationId])
+GO
+ALTER TABLE [dbo].[Marks]  WITH CHECK ADD FOREIGN KEY([RegistrationId])
+REFERENCES [dbo].[Students] ([RegistrationId])
+GO
+ALTER TABLE [dbo].[Marks]  WITH CHECK ADD FOREIGN KEY([SemesterSubjectId])
+REFERENCES [dbo].[SemesterSubjects] ([SemesterSubjectId])
+GO
+ALTER TABLE [dbo].[SemesterSubjects]  WITH CHECK ADD FOREIGN KEY([CourseId])
+REFERENCES [dbo].[Courses] ([CourseId])
+GO
+ALTER TABLE [dbo].[SemesterSubjects]  WITH CHECK ADD FOREIGN KEY([SessionId])
+REFERENCES [dbo].[Sessions] ([SessionId])
+GO
+ALTER TABLE [dbo].[SemesterSubjects]  WITH CHECK ADD FOREIGN KEY([SubjectId])
+REFERENCES [dbo].[Subjects] ([SubjectId])
+GO
+ALTER TABLE [dbo].[Students]  WITH CHECK ADD FOREIGN KEY([CourseId])
+REFERENCES [dbo].[Courses] ([CourseId])
+GO
+ALTER TABLE [dbo].[Students]  WITH CHECK ADD FOREIGN KEY([SessionId])
+REFERENCES [dbo].[Sessions] ([SessionId])
+GO
+USE [master]
+GO
+ALTER DATABASE [ProjectDB] SET  READ_WRITE 
+GO

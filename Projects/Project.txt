@@ -1,0 +1,615 @@
+class Account:
+    def __init__(self,username,password):
+        self._username = username
+        self._password = password
+        # self._userName = "Vignesh"
+        #self._passWord = "vignesh123"
+
+    def addUsername(self):
+        self._username = str(input("Please enter a username 6 characters long:"))
+
+        while len(self._username) != 6 and len(self._username) <=  6 :
+            self._username = str(input("Please enter a username 6 characters long:"))
+        return self._username
+
+    def getUsername(self):
+        return self._username
+
+    def addPassword(self):
+        self._password = str(input("Enter a 6 character long password having atleast 1 digit:"))
+
+        while not self.checkLength() or not self.checkDigit():
+            self._password = str(input("Enter a password :"))
+        return self._password 
+
+    def checkLength(self):
+        if len(self._password) < 6:
+            return False
+        return True
+        #done = True 
+        #while done:
+            #self._password = str(input("Enter a password :"))
+            #if len(self._password) < 6:
+                #self._password = str(input("Enter a password :"))
+
+
+        #return True
+
+    def checkDigit(self):
+        if self._password.isalpha():
+            return False
+        return True
+        #flag = True
+        #while flag:
+            #if self._password.isalpha():
+                #return False
+
+        #return True
+
+
+
+    #def getPassword(self):
+        #   return self._password
+
+    #if self._password == self._passWord:
+        #return True
+    #else:
+        #  print("invalid password")
+
+    #if self._username == self._userName:
+        #return True
+    #else:
+        #  print("invalid username")
+
+
+
+#def main():                 
+    #account = Account("l","P")
+    #account.addUsername()
+    #acc = account.getUsername()
+    ##account.checkLength()
+    ##acc1 = account.checkDigit()
+    #psdd = account.addPassword()
+    #print(acc)
+    #print(psdd)
+#main()
+
+
+class Student:
+    def __init__(self,name,yearOfBirth,birthCountry):
+        self._year = 2018 
+        self._previousCourses = []
+        self._currentCourses = []
+        self._name = name
+        self._birthYear = yearOfBirth
+        self._country = birthCountry
+
+    def getYear(self):
+        self._year = input("Please enter the year of admission:")
+        return self._year
+
+    def addPreviousCourses(self,courses):
+        self._previousCourses.append(courses)
+        self._courses = self._previousCourses
+
+    def getPreviousCourses(self):
+        return self._courses
+
+    def addCurrentCourses(self,newCourses):
+        self._currentCourses.append(newCourses)
+        self._newCourses = self._currentCourses
+
+
+    def getCurrentCourses(self):
+        return self._newCourses
+
+    def getStudentName(self):
+        return self._name
+
+    def getBirthYear(self):
+        return self._birthYear
+
+    def getBirthCountry(self):
+        return self._country
+
+#def main():
+    #s = Student("vignesh singla" , "2000" , "India")
+    #s.addPreviousCourses("CSCI101 : Python")
+    #s.addPreviousCourses("CSCI202 : Project Management")
+    #s.addPreviousCourses("CSCI301 : Java Programming")
+    #s.addCurrentCourses("CSCI401 ; Android Programming")
+    #year = s.getYear()
+    #previousCourses = s.getPreviousCourses()
+    #currentCourses = s.getCurrentCourses()
+    #studentName = s.getBirthYear()
+    #birthYear = s.getBirthYear()
+    #country = s.getBirthCountry()
+    #print("The year of joining: ",year)
+    #print("The courses you taken in the previous semester : ",previousCourses)
+    #print("Your Current Courses : ",currentCourses)
+    #print("Student Name: ",studentName)
+    #print("Birth Year :", birthYear)
+    #print("Country of birth :",country)
+
+#main()
+
+
+class StudentProfile:
+    def __init__(self,id,firstName,lastName,gender,address,country,age):
+        self._studentId = id
+        self._firstName = firstName
+        self._lastName = lastName
+        self._gender = gender
+        self._address = address
+        self._countryOfOrigin = country
+        self._age = age
+
+    def getStudentId(self):
+        return self._studentId
+
+    def getFirstName(self):
+        self._firstName = input("Please enter your first name:")
+        return self._firstName
+
+    def getLastName(self):
+        self._lastName = input("Please enter your last name:")
+        return self._lastName
+
+    def addGender(self):
+        self._gender = input("Please enter your gender:")
+     
+    def getGender(self):
+        return self._gender
+
+    def getAddress(self):
+        return self._address
+
+    def addCountry(self):
+        self._countryOfOrigin = input("Please enter your country of origin:")
+       
+    def getCountry(self):
+        return self._countryOfOrigin
+
+    def addAge(self):
+        self._age = input("Please enter age:")
+        
+    def getAge(self):
+        return self._age
+
+#def main():
+    #student = StudentProfile("7813007","Peter","Brown","Male","850 West Vancouver,Vancouver","CANADA","21")
+    #studentId  = student.getStudentId()
+    #studentFname = student.getFirstName()
+    #lastname = student.getLastName()
+    #name = studentFname + " " + lastname
+    #gender = student.getGender()
+    #address = student.getAddress()
+    #country = student.getCountry()
+    #age = student.getAge()
+    #print("Student name: ",name)
+    #print("Student ID:",studentId)
+    #print("Gender: ",gender)
+    #print("Country of origin: ",country)
+    #print("Age: ",age)
+
+#main()
+    
+class Transcript:
+    _totalCourses = 0
+    def __init__(self, courses, names, code, grade, unit, semester):
+        Transcript._totalCourses = Transcript._totalCourses + 1
+        self._courses = courses
+        self._name = names
+        self._code = code
+        self._grade = grade
+        self._unit = unit
+        self._semester = semester
+        self._totalCourses = Transcript._totalCourses
+
+    def getCourses(self):
+        return self._courses
+
+    def getName(self):
+        return self._name
+
+    def getCode(self):
+        return self._code
+
+    def getGrade(self):
+        return self._grade
+
+    def getUnit(self):
+        return self._unit
+
+    def getSemester(self):
+        return self._semester
+
+    def getTotalCourses(self):
+        return self._totalCourses 
+
+class GeneralTranscript(Transcript):
+    def __init__(self, courses, names, code, grade, unit, semester):
+        super().__init__(self,  courses, names, code, grade, unit, semester)
+
+    def getCourses(self):
+        return self._courses
+
+    def getName(self):
+        return self._name
+
+    def getCode(self):
+        return self._code
+
+    def getGrade(self):
+        return self._grade
+
+    def getUnit(self):
+        return self._unit
+
+    def getSemester(self):
+        return self._semester
+
+
+class CurrentSemesterTranscript(Transcript):
+
+    def __init__(self, courses, names, code, grade, unit, semester):
+        super().__init__(self,  courses, names, code, grade, unit, semester)
+   
+    def getCurrentSemsCourses(self):
+        return self._courses    
+
+    def getCurrentName(self):
+        return self._name
+
+    def getCurrentCode(self):
+        return self._code
+
+    def getCurrentGrade(self):
+        return self._grade
+
+    def getCurrentUnit(self):
+        return self._unit
+
+    def getCurrentSemester(self):
+        return self._semester 
+
+
+#general = GeneralTranscript("CSCI","Python",101,"b",19,2)
+#print(general.getCourses() ,": ", end="")
+#print(general.getName() ,":", end ="")
+#print(general.getCode(),":",  end ="")
+#print(general.getGrade(),":",  end ="")
+#print(general.getUnit(),":",  end ="")
+#print(general.getSemester(),  end ="")
+
+class Manager:
+    def __init__(self, firstName, lastName, title):
+        self._firstNameOfManager = firstName
+        self._lastNameOfManager = lastName
+        self._title = title
+    
+    def getMangerFirstName(self):
+        return self._firstNameOfManager
+    
+    def getManagerLastName(self):
+        return self._lastNameOfManager
+    
+    def getTitle(self):
+        return self._title
+    
+class CollegeCourses:
+    def __init__(self,allCourses, theirNames, theirUnits):
+        self._allCourses = allCourses
+        self._coursesNames = theirNames
+        self._coursesUnits = theirUnits
+        
+    def getAllCourses(self):
+        return self._allCourses
+    
+    def gettAllCoursesNames(self):
+        return self._coursesNames
+    
+    def getAllCoursesUnits(self):
+        return self._coursesUnits
+
+class StudentsInCollege:
+    def __init__(self, nameOfStudent, idOfStudent):
+        self._nameOfStudent = nameOfStudent
+        self._idOfStudent = idOfStudent
+        
+    def getStudentName(self):
+        return self._nameOfStudent
+    
+    def getIdOfStudent(self):
+        return self._idOfStudent
+    
+def testColllege():
+    collegeC1 = CollegeCourses("CSCI101", "Python", 3)
+    collegeC2 = CollegeCourses("CSCI102","Object-Oriented Programming",2)
+    collegeC3 = CollegeCourses("CSCI201", "Problem-Solving", 2)
+    collegeC4 = CollegeCourses("CSCI202","Project-Management",3)
+    collegeC5 = CollegeCourses("CSCI301", "Java Programming", 3)
+    collegeC6 = CollegeCourses("CSCI302", "Web Development",2)
+    collegeC7 = CollegeCourses("CSCI401","Android Programming",2)
+    collegeC8 = CollegeCourses("CSCI402", "ioS Applications", 3)
+    
+    cr1 = collegeC1.getAllCourses()
+    cr2 = collegeC2.getAllCourses()
+    cr3 = collegeC3.getAllCourses()
+    cr4 = collegeC4.getAllCourses()
+    cr5 = collegeC5.getAllCourses()
+    cr6 = collegeC6.getAllCourses()    
+    cr7 = collegeC7.getAllCourses()
+    cr8 = collegeC8.getAllCourses()
+    
+    cn1 = collegeC1.gettAllCoursesNames()
+    cn2 = collegeC2.gettAllCoursesNames()
+    cn3 = collegeC3.gettAllCoursesNames()
+    cn4 = collegeC4.gettAllCoursesNames()
+    cn5 = collegeC5.gettAllCoursesNames()
+    cn6 = collegeC6.gettAllCoursesNames()
+    cn7 = collegeC7.gettAllCoursesNames()        
+    cn8 = collegeC8.gettAllCoursesNames()
+    
+    cu1 = collegeC1.getAllCoursesUnits()
+    cu2 = collegeC2.getAllCoursesUnits()    
+    cu3 = collegeC3.getAllCoursesUnits()
+    cu4 = collegeC4.getAllCoursesUnits()
+    cu5 = collegeC5.getAllCoursesUnits() 
+    cu6 = collegeC6.getAllCoursesUnits()  
+    cu7 = collegeC7.getAllCoursesUnits() 
+    cu8 = collegeC8.getAllCoursesUnits() 
+    
+    print("1)",cr1,":",cn1,":",cu1,"[Not Taken]")
+    print("2)",cr2,":",cn2,":",cu2,"[Not Taken]")
+    print("3)",cr3,":",cn3,":",cu3,"[Not Taken]")
+    print("4)",cr4,":",cn4,":",cu4,"[]Not Taken")
+    print("5)",cr5,":",cn5,":",cu5,"[Taken at semester 1]")
+    print("6)",cr6,":",cn6,":",cu6,"[Taken at semester 2]")
+    print("7)",cr7,":",cn7,":",cu7,"[Taken at semester 4]")
+    print("8)",cr8,":",cn8,":",cu8,"[Taken at semester 3]")
+    
+def testCollegeStudents():
+    Students1 = StudentsInCollege("Joseph Rod", 812345)
+    Students2 = StudentsInCollege("Cristina Li", 8012333)
+    Students3 = StudentsInCollege("Adams Wang", 7812999)
+    
+    nameOne = Students1.getStudentName()
+    nameTwo = Students2.getStudentName()
+    nameThree= Students3.getStudentName()
+    
+    idOne = Students1.getIdOfStudent()
+    idTwo = Students2.getIdOfStudent()
+    idThree = Students3.getIdOfStudent()
+     
+    print("2)",nameOne,":",idOne)
+    print("3)",nameTwo,":",idTwo)
+    print("4)",nameThree,":",idThree)
+    
+    
+    
+    
+def test():
+    
+
+    print("Please Enter your account to login")
+    account = Account("l","P")
+    account.addUsername()
+    acc = account.getUsername()
+    account.checkLength()
+    acc1 = account.checkDigit()
+    psdd = account.addPassword()
+    print("Not registered yet? ")
+    user = input("Type 'Register' or  Press enter to start registration process!")    
+    
+    student = StudentProfile("7813007","Peter","Brown","Male","Vancouver","CANADA","21")
+    firstName = student.getFirstName()
+    lastName = student.getLastName()
+    print(firstName)
+    print(lastName)
+    name = firstName + " " + lastName
+    
+    student.addGender()
+    gender = student.getGender()
+    print(gender)
+    student.addCountry()
+    country = student.getCountry()
+    student.addAge()
+    age = student.getAge()
+    studentId  = student.getStudentId()
+    address = student.getAddress()
+    
+    s = Student("Navjeet Kaur" , "2000" , "India")
+    year = s.getYear()
+    print(year)
+    
+    account = Account("l","P")
+    account.addUsername()
+    acc1 = account.getUsername()
+    account.checkLength()
+    acc2 = account.checkDigit()
+    psdd2 = account.addPassword()
+    
+    print("Username:",acc1)
+    print("Password:",psdd2)
+    
+    print("Thanks, your account has  been created successfully. Welcome Abroad.")
+    print(name)
+    print(input())
+
+
+    print("Select from the options:")
+    print("[1] Print my enrolment certificate")
+    print("[2] Print my courses")
+    print("[3] Print my transcript")
+    print("[4] Print my GPA")
+    print("[5] Print my ranking among all students in the college")
+    print("[6] List all available courses")
+    print("[7] List all students")
+    print("[8] Show my profile")
+    print("[9] Logout" )
+    print("[10] Exit")
+    
+        
+   
+    #currentSemesterTranscript = CurrentSemesterTranscript("CSCI 120", "C Sharp", 24, 86, 15, 3, 3)
+    #c = currentSemesterTranscript.getCurrentSem()
+    
+    t1 = Transcript("CSCI101", "Python", 101, 86, 3, 1)
+    t2 = Transcript("CSCI202", "Project Management", 202, 82, 3, 1)
+    t3 = Transcript("CSCI301", "Java Programming", 301, 64, 3, 2)
+    t4 = Transcript("CSCI401", "Android Programming", 401, 76, 2,3 )
+    
+    c1 = t1.getCourses()
+    c2 = t2.getCourses()
+    c3 = t3.getCourses()
+    c4 = t4.getCourses()
+    
+    n1 = t1.getName()
+    n2 = t2.getName()
+    n3 = t3.getName()
+    n4 = t4.getName()
+    
+    g1 = t1.getGrade()
+    g2 = t2.getGrade()
+    g3 = t3.getGrade()
+    g4 = t4.getGrade()
+    
+    co1 = t1.getCode()
+    co2 = t2.getCode()
+    co3 = t3.getCode()
+    co4 = t4.getCode()
+    
+    u1 = t1.getUnit()
+    u2 = t2.getUnit()
+    u3 = t3.getUnit()
+    u4 = t4.getUnit()
+    
+    gpa = (g1*u1 + g2*u2 + g3*u3 + g4*u4)/(u1+u2+u3+u4)
+    currentGPA = (g4*u4) /u4
+         
+    tt4 = t4.getTotalCourses()
+    
+    sem1 = t1.getSemester()
+    sem2 = t2.getSemester()
+    sem3 = t3.getSemester()
+    sem4 = t4.getSemester()
+    
+    manager = Manager("Peter", "Jackson", "Manager")
+    firstn = manager.getMangerFirstName()
+    lastn = manager.getManagerLastName()
+    fullName = firstn + "" + lastn    
+    title = manager.getTitle()
+    
+    collegeC1 = CollegeCourses("CSCI101", "Python", 3)
+    collegeC2 = CollegeCourses("CSCI102","Object-Oriented Programming",2)
+    collegeC3 = CollegeCourses("CSCI201", "Problem-Solving", 2)
+    collegeC4 = CollegeCourses("CSCI202","Project-Management",3)
+    collegeC5 = CollegeCourses("CSCI301", "Java Programming", 3)
+    collegeC6 = CollegeCourses("CSCI302", "Web Development",2)
+    collegeC7 = CollegeCourses("CSCI401","Android Programming",2)
+    collegeC8 = CollegeCourses("CSCI402", "ioS Applications", 3)
+    
+  
+    enterNum = input("Please enter a key:")
+    
+        
+    if enterNum == "1" :
+        print("DearSir/Madam,")
+        print("This is to certify that",name," with studentId",studentId," is student in semester",sem4," at Columbia.")
+        print("He was admitted to our College in", year, "and has taken", tt4, "courses so far.")
+        print("Currently he resides at",address,".")
+        print("[",title,":",fullName,"]")
+      
+          
+    
+    elif enterNum == "2":
+        print("Hi Mr.",name,",")
+        print("You have taken the following courses so far:")
+        print("1)",c1)
+        print("2",c2)
+        print("3)",c3)
+        print("4)",c4,"[Current Semester]")
+      
+        
+    elif enterNum =="3":
+        print("Hi Mr.",name,",")
+        print("Here is your general transcript:")
+        print("1)",c1,":",n1,":",g1)
+        print("2)",c2,":",n2,":",g2)
+        print("3)",c3,":",n3,":",g3)
+        print("4)",c4,":",n4,":",g4,"[Current Semester]")
+        print("YOUR GPA IS:",gpa)
+
+        print("Here is your current semester transcript:")
+        print("1)", c4, ":", n4,":",g4)
+        print("YOUR current semester GPA IS:", currentGPA)
+        
+        
+        
+    elif enterNum == "4":
+        print("Hi Mr.", name)
+        print("Your overall GPA is:", gpa)
+        print("Your current semester's GPA is:", currentGPA)
+           
+        
+        
+    elif enterNum == "5":
+        print("Hi Mr.",name)
+        
+        if gpa >=90 :
+            rank = "1"
+        elif gpa >=70 and gpa<90:
+            rank = "2"
+        elif gpa>=60 and gpa<70:
+            rank = "3"
+        else:
+            rank = "4"
+            
+        print("Your overall GPA is",gpa,"and therefore your rank is",rank)
+        
+            
+        
+    elif enterNum == "6":
+        print("The following courses are offered in Columbia College:")
+        testColllege()  
+           
+        
+    elif enterNum == "7":
+        print("There are 4 students in Columbia College as following:")
+        print("1)", name,":",studentId)
+        testCollegeStudents()
+              
+        
+        
+    elif enterNum == "8":
+        print("Name: Mr.",name)
+        print("Student Id:", studentId)
+        print("Gender:", gender )
+        print("Address:", student.getAddress())
+        print("Country Of Origin:", country)
+        print("Age:", age )
+        print("Year Of Admission:", year)
+        print("Overall GPA:", gpa)
+        print("Courses taken so far:", c1,":",n1, c2,":",n2, c3,":",n3, c4,n4 , "[current semester]")
+        
+            
+        
+        
+    elif enterNum == "9":
+       
+            
+            test()
+                     
+            
+    return 
+        
+        
+def main():
+    test()
+    
+main()
+---------------------------------------------------------
+Note-
+1. Please check and change the keywords and Names used in the project.
+2. This project does not support the storage of names, so if you fix that then it will be good otherwise upload directly.
